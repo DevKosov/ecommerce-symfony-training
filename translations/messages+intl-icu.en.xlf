@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="pXIwl7J" resname="default.accueil.title">
+        <source>default.accueil.title</source>
+        <target>Symfony demo</target>
+      </trans-unit>
+      <trans-unit id="o8dO1wm" resname="default.accueil.slogan">
+        <source>default.accueil.slogan</source>
+        <target>Nothing to buy, only to learn</target>
+      </trans-unit>
+      <trans-unit id="H0HbfWT" resname="default.nav.home">
+        <source>default.nav.home</source>
+        <target>SF Demo</target>
+      </trans-unit>
+      <trans-unit id=".pf4BTm" resname="default.nav.contact">
+        <source>default.nav.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="45LMEZm" resname="default.nav.connexion">
+        <source>default.nav.connexion</source>
+        <target>Sign In</target>
+      </trans-unit>
+      <trans-unit id="cJ2oCZ7" resname="default.nav.connexionInscription">
+        <source>default.nav.connexionInscription</source>
+        <target>Sign In/Sign Up</target>
+      </trans-unit>
+      <trans-unit id="FtxaREn" resname="default.nav.mon_compte">
+        <source>default.nav.mon_compte</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="uGwaYGg" resname="default.nav.mes_commandes">
+        <source>default.nav.mes_commandes</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="jWeIsHT" resname="default.nav.deconnexion">
+        <source>default.nav.deconnexion</source>
+        <target>Disconnect</target>
+      </trans-unit>
+      <trans-unit id="7vz0Jit" resname="default.search">
+        <source>default.search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="n_4_AOA" resname="default.produits">
+        <source>default.produits</source>
+        <target>Product(s)</target>
+      </trans-unit>
+      <trans-unit id="kl_OnhL" resname="default.boutique">
+        <source>default.boutique</source>
+        <target>Store</target>
+      </trans-unit>
+      <trans-unit id="VLTltYk" resname="default.boutique.rayons">
+        <source>default.boutique.rayons</source>
+        <target>Rayons</target>
+      </trans-unit>
+      <trans-unit id="XnZZmwd" resname="default.rayon">
+        <source>default.rayon</source>
+        <target>Rayon</target>
+      </trans-unit>
+      <trans-unit id="fAOkYq2" resname="default.nav.chercherProduits">
+        <source>default.nav.chercherProduits</source>
+        <target>Search products...</target>
+      </trans-unit>
+      <trans-unit id="uxBBaFE" resname="default.topVente">
+        <source>default.topVente</source>
+        <target>Top Sales</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

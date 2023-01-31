@@ -1,0 +1,95 @@
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{{ path('accueil') }}">
+        <i class="fas fa-home"></i> {{ 'default.nav.home' | trans }}    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('boutique') }}">
+                    <i class="fas fa-store"></i> {{ 'default.boutique' | trans }}                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('panier_index')}}">
+                    <i class="fas fa-shopping-cart"></i>
+                    {{ nb_products }} Produit(s)
+                </a>
+</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('contact') }}">
+                    <i class="fas fa-comments"></i> {{ 'default.nav.contact' | trans }}                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <span class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-user"></i> {{ 'default.nav.connexion' | trans }}                                    </span>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item " href="/mi5/fr/login">
+                        {{ 'default.nav.connexionInscription' | trans }}                    </a>
+                    <a class="dropdown-item disabled" href="/mi5/fr/usager/compte">
+                        {{ 'default.nav.mon_compte' | trans }}                    </a>
+                    <a class="dropdown-item disabled" href="/mi5/fr/usager/commandes">
+                        {{ 'default.nav.mes_commandes' | trans }}                    </a>
+                    <a class="dropdown-item disabled" href="/mi5/fr/logout">
+                        {{ 'default.nav.deconnexion' | trans }}                    </a>
+                </div>
+            </li>
+            <li class="nav-item"
+                data-toggle="tooltip" title="Ne devra être visible que pour l'Admin" data-placement="right" data-html="true">
+                <span class="nav-link disabled" href="">
+                    <i class="fas fa-tools"></i> BackOffice
+                </span>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" >
+            <input class="form-control mr-sm-2" id="searchString" type="text"
+                   placeholder="{{ 'default.nav.chercherProduits' | trans }}" aria-label="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+        <ul class="navbar-nav my-0">
+            <li class="nav-item dropdown">
+                    <span class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EUR
+                    </span>
+                <div class="dropdown-menu" aria-labelledby="dropdown02"  style="min-width: 5rem;">
+                    <a class="dropdown-item" href="/mi5/fr/changer_monnaie/CAD/home/%7B%22_locale%22:%22fr%22%7D">
+                        CAD
+                    </a>
+                    <a class="dropdown-item" href="/mi5/fr/changer_monnaie/USD/home/%7B%22_locale%22:%22fr%22%7D">
+                        USD
+                    </a>
+                    <a class="dropdown-item" href="/mi5/fr/changer_monnaie/GBP/home/%7B%22_locale%22:%22fr%22%7D">
+                        GBP
+                    </a>
+                    <a class="dropdown-item" href="/mi5/fr/changer_monnaie/PHP/home/%7B%22_locale%22:%22fr%22%7D">
+                        PHP
+                    </a>
+                    <a class="dropdown-item" href="/mi5/fr/changer_monnaie/IDR/home/%7B%22_locale%22:%22fr%22%7D">
+                        IDR
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav my-0">
+            <li class="nav-item dropdown">
+            <span class="nav-link dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+                <img style="height:32px;" src="{{ asset('images/locale/' ~ app.request.attributes.get('_locale') ~ '.png') }}" alt="{{ app.request.attributes.get('_locale') }}">
+            </span>
+            <div class="dropdown-menu" aria-labelledby="dropdown03" style="min-width: 5rem;">
+                {% for locale in supported_locales|split('|') %}
+                    {% if locale != app.request.attributes.get('_locale') %}
+{#                            {% set route = app.request.attributes.get('_route') %}#}
+{#                            {% set params = app.request.attributes.get('_route_params') %}#}
+                            <a class="dropdown-item" href="{{ path(route, params | merge({'_locale': locale })) }}">
+                                <img style="height:32px;" src="{{ asset('images/locale/' ~ locale ~ '.png') }}" alt="{{ locale }}">
+                            </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </li>
+        </ul>
+    </div>
+</nav>
