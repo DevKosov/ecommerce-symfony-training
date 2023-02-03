@@ -23,15 +23,15 @@
             </li>
             <li class="nav-item dropdown">
                 <span class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-user"></i> {{ 'default.nav.connexion' | trans }}                                    </span>
+                                            <i class="fas fa-user"></i> {{ app.user() ? app.user().getNom() : 'default.nav.connexion' | trans }}                                    </span>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item " href="/mi5/fr/login">
+                    <a class="dropdown-item {{ app.user() ? 'disabled' : '' }} " href="{{ path('app_login') }}">
                         {{ 'default.nav.connexionInscription' | trans }}                    </a>
-                    <a class="dropdown-item disabled" href="/mi5/fr/usager/compte">
+                    <a class="dropdown-item {{ app.user() ? '' : 'disabled' }}" href="{{ path('app_user_index') }}">
                         {{ 'default.nav.mon_compte' | trans }}                    </a>
-                    <a class="dropdown-item disabled" href="/mi5/fr/usager/commandes">
+                    <a class="dropdown-item {{ app.user() ? '' : 'disabled' }}" href="{{ path('user_commandes') }}">
                         {{ 'default.nav.mes_commandes' | trans }}                    </a>
-                    <a class="dropdown-item disabled" href="/mi5/fr/logout">
+                    <a class="dropdown-item {{ app.user() ? '' : 'disabled' }}" href="{{ path('app_logout') }}">
                         {{ 'default.nav.deconnexion' | trans }}                    </a>
                 </div>
             </li>

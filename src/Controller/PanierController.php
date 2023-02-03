@@ -46,16 +46,18 @@ class PanierController extends AbstractController
 
     public function validation(PanierService $panierService,UserRepository $userRepository,SessionInterface $session,EntityManagerInterface $entityManager)
     {
+        $user = $this->getUser();
         if (empty($panierService->getContenu()))
             return $this->redirectToRoute('boutique');
-        if ($session->has('userId')) {
-            $user = $userRepository->findOneBy(['id'=> $session->get('userId')]);
+        if ($user) {
+//            $userdb = $userRepository->findOneBy(['id'=> $user->]);
+            dump($user);
+//            dump($userdb);
             $panierService->panierToCommande($user,$entityManager);
             return $this->redirectToRoute('user_commandes');
         }
         else
             return $this->redirectToRoute('app_user_new');
-
     }
 
     public function vider(PanierService $panierService)

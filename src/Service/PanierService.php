@@ -7,6 +7,8 @@ use App\Entity\User;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 // Service pour manipuler le panier et le stocker en session
 class PanierService {
 
@@ -125,7 +127,7 @@ class PanierService {
      * @param User $user
      * @return Commande
      */
-    public function panierToCommande(User $user, EntityManagerInterface $entityManager) : Commande
+    public function panierToCommande(UserInterface $user, EntityManagerInterface $entityManager) : Commande
     {
         $commandeEm = $entityManager->getRepository(Commande::class);
         $ligneDeCommandeEm = $entityManager->getRepository(LigneCommande::class);
