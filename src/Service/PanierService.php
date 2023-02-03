@@ -1,5 +1,9 @@
 <?php
 namespace App\Service;
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
+use App\Entity\Product;
+use App\Entity\User;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -27,7 +31,16 @@ class PanierService {
     // getContenu renvoie le contenu du panier
     // Tableau d'éléments [ "produit" => un produit, "quantite" => quantite ]
     public function getContenu() {
-        return $this->panier;
+        $panier = [];
+        foreach ($this->panier as $product){
+            $produit = $this->productRepository->findBy(['id'=> $product['id_produit']]);
+            $panier[] = [
+                'produit' => $produit,
+                'quantite' => $product['quantite']
+            ];
+        }
+        return $panier;
+
     }
 
     // getTotal renvoie le montant total du panier
@@ -37,8 +50,14 @@ class PanierService {
         else{
             $total = 0;
             foreach ($this->panier as $produit){
-                dump($produit);
-                $total += $produit['produit'][0]->getPrix() * $produit['quantite'];
+                $docProduit = $this->productRepository->findOneBy(['id'=> $produit['id_produit']]);
+                if ($docProduit){
+
+                    dump($docProduit);
+                    $total += $docProduit->getPrix() * $produit['quantite'];
+                }
+                else
+                    $total = 0;
             }
             return $total;
         }
@@ -63,9 +82,8 @@ class PanierService {
         if (isset($this->panier[$idProduit]))
             $this->panier[$idProduit]['quantite'] += $quantite;
         else {
-            $produit = $this->productRepository->findBy(['id'=> $idProduit]);
             $this->panier[$idProduit] = [
-                'produit' => $produit,
+                'id_produit' => $idProduit,
                 'quantite' => $quantite
             ];
         }
@@ -100,5 +118,42 @@ class PanierService {
     {
         $this->panier = [];
         $this->session->set(PanierService::PANIER_SESSION,$this->panier);
+    }
+
+    /**
+     * Retourne la commande qui a ete cree
+     * @param User $user
+     * @return Commande
+     */
+    public function panierToCommande(User $user, EntityManagerInterface $entityManager) : Commande
+    {
+        $commandeEm = $entityManager->getRepository(Commande::class);
+        $ligneDeCommandeEm = $entityManager->getRepository(LigneCommande::class);
+
+        // Creation d'une commande
+        $commande = new Commande();
+        $commande->setUser($user);
+        $commande->setStatut( 'En Cours');
+        $entityManager->persist($commande);
+        // Pour chaque ligne de commande sur le panier ajouter sur la commande
+        foreach($this->getContenu() as $lcmd){
+            dump($lcmd['produit'][0]);
+
+            $ligneDeCommande = new LigneCommande();
+            $ligneDeCommande->setCommande($commande);
+            $ligneDeCommande->setProduct($lcmd['produit'][0]);
+            $ligneDeCommande->setQuantite($lcmd['quantite']);
+            $ligneDeCommande->setPrix($lcmd['produit'][0]->getPrix() * $lcmd['quantite']);
+            $entityManager->persist($ligneDeCommande);
+        }
+
+        // flush
+
+        $entityManager->flush();
+
+        //Supprimer le panier
+        $this->vider();
+
+        return $commande;
     }
 }

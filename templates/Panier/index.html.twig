@@ -11,8 +11,10 @@
             <div class="col-md-12 btn-group btn-group-lg" role="group">
                 <a class="btn btn-primary" href="{{ path('boutique') }}">
                     Continue Shopping                </a>
-                <a class="btn btn-primary" href="/mi5/en/panier/commander">
+                {% if panier | length != 0 %}
+                <a class="btn btn-primary" href="{{ path('panier_validation') }}">
                     Place an Order                    </a>
+                {% endif %}
             </div>
         </div>
         <div class="card-body">
