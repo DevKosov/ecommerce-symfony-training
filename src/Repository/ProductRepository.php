@@ -54,27 +54,6 @@ class ProductRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-
-    /**
-     * @param $value
-     * @return array
-     */
-    public function like($value)
-    {
-        $value = "%" .$value . "%";
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            "SELECT p
-            FROM App\Entity\Product p
-            WHERE p.libelle like :libelle"
-        )->setParameter('libelle', $value);
-        // returns an array of Product objects
-        return $query->getResult();
-    }
-
 //    public function findOneBySomeField($value): ?Product
 //    {
 //        return $this->createQueryBuilder('p')

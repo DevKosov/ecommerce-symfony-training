@@ -65,3 +65,18 @@ panier_vider:
   controller: App\Controller\PanierController::vider
   requirements:
     _locale: '%app.supported_locales%'
+
+panier_validation:
+  path: /{_locale}/panier/validation
+  controller: App\Controller\PanierController::validation
+  requirements:
+    _locale: '%app.supported_locales%'
+
+
+app_user_new:
+  path: /{_locale}/signup
+  controller: App\Controller\UserController::new
+  methods: [GET, POST]
+  requirements:
+    _locale: '%app.supported_locales%'
+

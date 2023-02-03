@@ -1,5 +1,8 @@
 <?php
 namespace App\Service;
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
+use App\Entity\User;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -100,5 +103,42 @@ class PanierService {
     {
         $this->panier = [];
         $this->session->set(PanierService::PANIER_SESSION,$this->panier);
+    }
+
+    /**
+     * Retourne la commande qui a ete cree
+     * @param User $user
+     * @return Commande
+     */
+    public function panierToCommande(User $user, EntityManagerInterface $entityManager) : Commande
+    {
+        $commandeEm = $entityManager->getRepository(Commande::class);
+        $ligneDeCommandeEm = $entityManager->getRepository(LigneCommande::class);
+
+        // Creation d'une commande
+        $commande = new Commande();
+        $commande->setUserId(user_id:$user);
+        $commande->setStatut(statut: 'En Cours');
+        $commandeEm->save(entity: $commande,flush: true);
+
+        // Pour chaque ligne de commande sur le panier ajouter sur la commande
+        foreach($this->getContenu() as $lcmd){
+
+            $ligneDeCommande = new LigneCommande();
+            $ligneDeCommande->setCommande($commande);
+            $ligneDeCommande->setProduct($lcmd['produit'][0]);
+            $ligneDeCommande->setQuantite($lcmd['quantite']);
+            $ligneDeCommande->setPrix($lcmd['produit'][0]->getPrix() * $lcmd['quantite']);
+            $ligneDeCommandeEm->save($ligneDeCommande,true);
+        }
+
+        // flush
+
+        $entityManager->flush();
+
+        //Supprimer le panier
+        $this->vider();
+
+        return $commande;
     }
 }

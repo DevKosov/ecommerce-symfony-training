@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Service\PanierService;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 class PanierController extends AbstractController
 {
     public function index(PanierService $panierService)
@@ -13,11 +17,13 @@ class PanierController extends AbstractController
         $nb_items = $panierService->getNbProduits();
         $prix_total = $panierService->getTotal();
 
+        dump($panier);
         return $this->render("Panier/index.html.twig",[
             'panier' => $panier,
             'nb_products' => $nb_items,
             'prix_total' => $prix_total
             ]);
+
     }
 
     public function ajouter(int $idProduit, int $quantite,PanierService $panierService)
@@ -36,6 +42,22 @@ class PanierController extends AbstractController
     {
         $panierService->supprimerProduit($idProduit);
         return $this->redirectToRoute('panier_index');
+    }
+
+    public function validation(PanierService $panierService,UserRepository $userRepository,SessionInterface $session,EntityManagerInterface $entityManager)
+    {
+        if ($session->has('userId') && !empty($panierService->getContenu()))
+            $userId = $session->get('userId');
+        else
+            return $this->redirectToRoute('app_user_new');
+
+        $user = $userRepository->findOneBy(['id'=> $userId]);
+        $panierService->panierToCommande($user,$entityManager);
+        $commandes = $user->getCommandes();
+
+        return $this->render("Panier/validation.html.twig",[
+            'commandes' => $commandes,
+        ]);
     }
 
     public function vider(PanierService $panierService)

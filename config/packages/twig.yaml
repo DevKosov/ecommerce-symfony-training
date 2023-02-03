@@ -3,6 +3,8 @@ twig:
     globals:
         supported_locales: '%app.supported_locales%'
 
+    form_themes: ['bootstrap_5_layout.html.twig']
+
 when@test:
     twig:
         strict_variables: true

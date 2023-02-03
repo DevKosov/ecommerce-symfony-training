@@ -12,17 +12,17 @@ class Categorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $visuel = null;
+    private ?string $texte = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $texte = null;
+    private ?string $visuel = null;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Product::class)]
     private Collection $products;
@@ -49,18 +49,6 @@ class Categorie
         return $this;
     }
 
-    public function getVisuel(): ?string
-    {
-        return $this->visuel;
-    }
-
-    public function setVisuel(string $visuel): self
-    {
-        $this->visuel = $visuel;
-
-        return $this;
-    }
-
     public function getTexte(): ?string
     {
         return $this->texte;
@@ -69,6 +57,18 @@ class Categorie
     public function setTexte(string $texte): self
     {
         $this->texte = $texte;
+
+        return $this;
+    }
+
+    public function getVisuel(): ?string
+    {
+        return $this->visuel;
+    }
+
+    public function setVisuel(string $visuel): self
+    {
+        $this->visuel = $visuel;
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Categorie
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->setCategorie($this);
+            $product->setCategorieId($this);
         }
 
         return $this;
@@ -95,8 +95,8 @@ class Categorie
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategorie() === $this) {
-                $product->setCategorie(null);
+            if ($product->getCategorieId() === $this) {
+                $product->setCategorieId(null);
             }
         }
 
