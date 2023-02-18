@@ -69,6 +69,10 @@
         <source>default.topVente</source>
         <target>Top Sales</target>
       </trans-unit>
+        <trans-unit id="0">
+            <source>default.nav.inscription</source>
+            <target>messages</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

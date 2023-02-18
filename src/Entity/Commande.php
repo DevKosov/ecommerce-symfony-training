@@ -34,7 +34,7 @@ class Commande
     public function __construct()
     {
         $this->ligneCommandes = new ArrayCollection();
-        $this->date_commande = new DateTime();
+        $this->date_commande = new DateTime("now");
     }
 
     public function getId(): ?int
@@ -84,6 +84,24 @@ class Commande
     public function getLigneCommandes(): Collection
     {
         return $this->ligneCommandes;
+    }
+
+    public function getQuantite() : int
+    {
+        $total = 0;
+        foreach ($this->getLigneCommandes() as $cmd){
+            $total += $cmd->getQuantite();
+        }
+        return $total;
+    }
+
+    public function getPrixTotal() : float
+    {
+        $total = 0;
+        foreach ($this->getLigneCommandes() as $cmd){
+            $total += $cmd->getPrix();
+        }
+        return $total;
     }
 
     public function addLigneCommande(LigneCommande $ligneCommande): self

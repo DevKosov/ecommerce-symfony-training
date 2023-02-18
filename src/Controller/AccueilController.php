@@ -3,6 +3,8 @@ namespace App\Controller;
 use App\Repository\ProductRepository;
 use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 class AccueilController extends AbstractController
 {
     public function accueil()
@@ -22,7 +24,7 @@ class AccueilController extends AbstractController
             "products" => $products
         ]);
     }
-    public function navBar(string $supported_locales, string $route, array $params, PanierService $panierService)
+    public function navBar(string $supported_locales, string $route, array $params, PanierService $panierService, SessionInterface $session)
     {
         $nb_produits = $panierService->getNbProduits();
         return $this->render('navbar.html.twig',[

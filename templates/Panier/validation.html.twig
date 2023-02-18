@@ -20,10 +20,10 @@
                     <tbody>
                     {% for commande in commandes %}
                         <tr class="text-danger" style='font-weight: bold;'>
-                            <td>{{ commande.getId() }}</td>
-                            <td>2 févr. 2023 à 10:54:38</td>
-                            <td>{{ commande.getQuantite() }}</td>
-                            <td>2,50 €</td>
+                            <td> {{ commande.getId() }}</td>
+                            <td> {{ commande.getDateCommande() | date }}</td>
+                            <td> {{ commande.getQuantite() }} </td>
+                            <td> {{ commande.getPrixTotal()}} €</td>
                             <td>
                                 <i class="fas fa-hourglass-half" data-toggle="tooltip" title="validation en Attente" data-placement="right"></i>
                             </td>

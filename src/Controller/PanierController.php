@@ -46,14 +46,14 @@ class PanierController extends AbstractController
 
     public function validation(PanierService $panierService,UserRepository $userRepository,SessionInterface $session,EntityManagerInterface $entityManager)
     {
-        if ($session->has('userId') && !empty($panierService->getContenu()))
-            $userId = $session->get('userId');
-        else
+        if (!$this->getUser())
             return $this->redirectToRoute('app_user_new');
 
-        $user = $userRepository->findOneBy(['id'=> $userId]);
-        $panierService->panierToCommande($user,$entityManager);
-        $commandes = $user->getCommandes();
+        if (empty($panierService->getContenu()))
+            return $this->redirectToRoute('commandes');
+
+        $panierService->panierToCommande($this->getUser(),$entityManager);
+        $commandes = $this->getUser()->getCommandes()->toArray();
 
         return $this->render("Panier/validation.html.twig",[
             'commandes' => $commandes,

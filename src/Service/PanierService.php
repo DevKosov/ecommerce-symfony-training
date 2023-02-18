@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 // Service pour manipuler le panier et le stocker en session
 class PanierService {
 
@@ -30,7 +32,14 @@ class PanierService {
     // getContenu renvoie le contenu du panier
     // Tableau d'éléments [ "produit" => un produit, "quantite" => quantite ]
     public function getContenu() {
-        return $this->panier;
+        $panier = [];
+        foreach ($this->panier as $id_produit => $quantite) {
+            $panier[] = [
+                "produit" => $this->productRepository->findBy(['id' => $id_produit]),
+                "quantite" => $quantite
+            ];
+        }
+        return $panier;
     }
 
     // getTotal renvoie le montant total du panier
@@ -39,9 +48,9 @@ class PanierService {
             return 0;
         else{
             $total = 0;
-            foreach ($this->panier as $produit){
-                dump($produit);
-                $total += $produit['produit'][0]->getPrix() * $produit['quantite'];
+            foreach ($this->panier as $id_produit => $quantite){
+                $produit = $this->productRepository->findOneBy(['id' =>$id_produit]);
+                $total += $produit->getPrix() * $quantite;
             }
             return $total;
         }
@@ -53,8 +62,8 @@ class PanierService {
             return 0;
         else{
             $total = 0;
-            foreach ($this->panier as $produit){
-                $total += $produit['quantite'];
+            foreach ($this->panier as $quantite){
+                $total += $quantite;
             }
             return $total;
         }
@@ -64,13 +73,9 @@ class PanierService {
     public function ajouterProduit(int $idProduit, int $quantite = 1) {
 
         if (isset($this->panier[$idProduit]))
-            $this->panier[$idProduit]['quantite'] += $quantite;
+            $this->panier[$idProduit] += $quantite;
         else {
-            $produit = $this->productRepository->findBy(['id'=> $idProduit]);
-            $this->panier[$idProduit] = [
-                'produit' => $produit,
-                'quantite' => $quantite
-            ];
+            $this->panier[$idProduit] = $quantite;
         }
 
         $this->session->set(PanierService::PANIER_SESSION,$this->panier);
@@ -81,10 +86,10 @@ class PanierService {
 
         if (isset($this->panier[$idProduit])) {
 
-            if ($quantite >= $this->panier[$idProduit]['quantite'])
+            if ($quantite >= $this->panier[$idProduit])
                 $this->supprimerProduit($idProduit);
             else
-                $this->panier[$idProduit]['quantite'] -= $quantite;
+                $this->panier[$idProduit] -= $quantite;
 
             $this->session->set(PanierService::PANIER_SESSION,$this->panier);
         }
@@ -110,7 +115,7 @@ class PanierService {
      * @param User $user
      * @return Commande
      */
-    public function panierToCommande(User $user, EntityManagerInterface $entityManager) : Commande
+    public function panierToCommande(UserInterface $user, EntityManagerInterface $entityManager) : Commande
     {
         $commandeEm = $entityManager->getRepository(Commande::class);
         $ligneDeCommandeEm = $entityManager->getRepository(LigneCommande::class);
@@ -119,19 +124,16 @@ class PanierService {
         $commande = new Commande();
         $commande->setUserId(user_id:$user);
         $commande->setStatut(statut: 'En Cours');
-        $commandeEm->save(entity: $commande,flush: true);
-
+        $commandeEm->save(entity: $commande);
         // Pour chaque ligne de commande sur le panier ajouter sur la commande
         foreach($this->getContenu() as $lcmd){
-
             $ligneDeCommande = new LigneCommande();
             $ligneDeCommande->setCommande($commande);
             $ligneDeCommande->setProduct($lcmd['produit'][0]);
             $ligneDeCommande->setQuantite($lcmd['quantite']);
             $ligneDeCommande->setPrix($lcmd['produit'][0]->getPrix() * $lcmd['quantite']);
-            $ligneDeCommandeEm->save($ligneDeCommande,true);
+            $ligneDeCommandeEm->save($ligneDeCommande);
         }
-
         // flush
 
         $entityManager->flush();
