@@ -6,7 +6,7 @@
         <div class="card-header">
             <h1>
                 <i class="fas fa-shopping-cart"></i> {{ nb_products }} Item(s) :
-                <b>€{{ prix_total }}</b>
+                <b>{{ prix_total | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'})}}</b>
             </h1>
             <div class="col-md-12 btn-group btn-group-lg" role="group">
                 <a class="btn btn-primary" href="{{ path('boutique') }}">
@@ -42,7 +42,7 @@
                             </a>
                         </td>
                         <td class="text-right">
-                            €{{ item.produit.0.getPrix() }}
+                            {{ item.produit.0.getPrix() | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'}) }}
                         </td>
                         <td>
                             <a href="{{ path('panier_enlever',{ 'idProduit': item.produit.0.getId() , 'quantite':1 }) }}">
@@ -55,7 +55,7 @@
                             </a>
                         </td>
                         <td class="text-right">
-                            €{{ item.produit.0.getPrix() * item.quantite }}
+                            {{ (item.produit.0.getPrix() * item.quantite) | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'})}}
                         </td>
                         <td>
                             <a href="{{ path('panier_supprimer',{ 'idProduit': item.produit.0.getId()} ) }}">
@@ -70,7 +70,7 @@
                         <th class="text-right" colspan="4">
                             Total                                </th>
                         <th class="text-right">
-                            €{{ prix_total }}
+                            {{ prix_total | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'})}}
                         </th>
                         <th>
                             <a href="{{ path('panier_vider') }}">

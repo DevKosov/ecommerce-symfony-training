@@ -69,10 +69,74 @@
         <source>default.topVente</source>
         <target>Top Vente</target>
       </trans-unit>
-        <trans-unit id="0">
-            <source>default.nav.inscription</source>
-            <target>messages</target>
-        </trans-unit>
+      <trans-unit id="RwQQY4z" resname="default.nav.inscription">
+        <source>default.nav.inscription</source>
+        <target>messages</target>
+      </trans-unit>
+      <trans-unit id="Hu9UHN." resname="signup.email.label">
+        <source>signup.email.label</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="h8L_Cms" resname="signup.email.placeholder">
+        <source>signup.email.placeholder</source>
+        <target>example@mail.fr</target>
+      </trans-unit>
+      <trans-unit id="i3_ypuH" resname="signup.email.required">
+        <source>signup.email.required</source>
+        <target>L'email est obligatoire.</target>
+      </trans-unit>
+      <trans-unit id="GMsVcyA" resname="signup.email.invalid">
+        <source>signup.email.invalid</source>
+        <target>L'email n'est pas correcte.</target>
+      </trans-unit>
+      <trans-unit id="_yLEAHD" resname="signup.password.label">
+        <source>signup.password.label</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="UrYGA4j" resname="signup.password.help">
+        <source>signup.password.help</source>
+        <target>Le mot de passe doit avoir au minimum 6 lettres</target>
+      </trans-unit>
+      <trans-unit id="5xEGFR7" resname="signup.password.required">
+        <source>signup.password.required</source>
+        <target>Le mot de passe est obligatoire.</target>
+      </trans-unit>
+      <trans-unit id="vTyrOBl" resname="signup.password.length">
+        <source>signup.password.length</source>
+        <target>Le mot de passe doit avoir au minimum 6 lettres</target>
+      </trans-unit>
+      <trans-unit id="LWF_SZb" resname="signup.nom.label">
+        <source>signup.nom.label</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id=".x5XzNf" resname="signup.nom.required">
+        <source>signup.nom.required</source>
+        <target>Le nom est obligatoire</target>
+      </trans-unit>
+      <trans-unit id="NVXUSKy" resname="signup.nom.length">
+        <source>signup.nom.length</source>
+        <target>Le nom doit avoir au maximum 255 lettres</target>
+      </trans-unit>
+      <trans-unit id="kv4x6_b" resname="signup.prenom.label">
+        <source>signup.prenom.label</source>
+        <target>prenom</target>
+      </trans-unit>
+      <trans-unit id="r1CgGPr" resname="signup.prenom.required">
+        <source>signup.prenom.required</source>
+        <target>Le prenom est obligatoire</target>
+      </trans-unit>
+      <trans-unit id="MYPhI5C" resname="signup.prenom.length">
+        <source>signup.prenom.length</source>
+        <target>Le prenom doit avoir au maximum 255 lettres</target>
+      </trans-unit>
+      <trans-unit id="h8fr1tz" resname="signup.title">
+        <source>signup.title</source>
+        <target>Creer un Compte</target>
+      </trans-unit>
+      <trans-unit id="gYi8xza" resname="default.nav.Inscription">
+        <source>default.nav.Inscription</source>
+        <target>Inscription</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

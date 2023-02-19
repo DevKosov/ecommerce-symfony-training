@@ -7,7 +7,7 @@
             <h2>
                 <span class="badge badge-primary">
                     <i class="fas fa-cart-plus"></i>&nbsp;&nbsp;
-                    {{ product.prix }}€
+                    {{ product.prix | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'}) }}
                 </span>
             </h2>
         </div>

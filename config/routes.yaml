@@ -103,3 +103,7 @@ app_logout:
   controller: App\Controller\SecurityController::logout
   requirements:
     _locale: '%app.supported_locales%'
+
+currency_switcher:
+  path: /currency/{currency}
+  controller: App\Controller\AccueilController::switchCurrency

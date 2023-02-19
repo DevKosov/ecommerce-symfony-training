@@ -41,7 +41,9 @@
             </div>
         </div>
         <!-- debut de la sidebar -->
-        {% include "sidebar.html.twig" %}
+        {{
+            render(controller("App\\Controller\\AccueilController::topSales"))
+        }}
         <!-- fin de la navbar -->
     </div>
 </main>

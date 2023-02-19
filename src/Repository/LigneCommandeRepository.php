@@ -39,20 +39,19 @@ class LigneCommandeRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return LigneCommande[] Returns an array of LigneCommande objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
+    public function getMostSoldProducts($limit): array
+    {
+        $qb = $this->createQueryBuilder('lc')
+            ->select('IDENTITY(lc.product) AS product_id, SUM(lc.quantite) as total_quantity')
+            ->groupBy('lc.product')
+            ->orderBy('total_quantity', 'DESC')
+            ->setMaxResults($limit);
+
+
+        return $qb->getQuery()->getResult();
+
+    }
 
 //    public function findOneBySomeField($value): ?LigneCommande
 //    {

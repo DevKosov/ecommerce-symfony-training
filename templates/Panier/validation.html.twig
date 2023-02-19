@@ -23,7 +23,7 @@
                             <td> {{ commande.getId() }}</td>
                             <td> {{ commande.getDateCommande() | date }}</td>
                             <td> {{ commande.getQuantite() }} </td>
-                            <td> {{ commande.getPrixTotal()}} €</td>
+                            <td> {{ commande.getPrixTotal() | currency_convert | format_currency(app.session.get("chosenCurrency"), {rounding_mode: 'floor'})}} </td>
                             <td>
                                 <i class="fas fa-hourglass-half" data-toggle="tooltip" title="validation en Attente" data-placement="right"></i>
                             </td>

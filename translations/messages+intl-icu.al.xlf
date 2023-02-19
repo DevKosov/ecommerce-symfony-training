@@ -69,10 +69,74 @@
         <source>default.topVente</source>
         <target>Shitjet kryesore</target>
       </trans-unit>
-        <trans-unit id="0">
-            <source>default.nav.inscription</source>
-            <target>messages</target>
-        </trans-unit>
+      <trans-unit id="RwQQY4z" resname="default.nav.inscription">
+        <source>default.nav.inscription</source>
+        <target>messages</target>
+      </trans-unit>
+      <trans-unit id="Hu9UHN." resname="signup.email.label">
+        <source>signup.email.label</source>
+        <target>Emaili</target>
+      </trans-unit>
+      <trans-unit id="h8L_Cms" resname="signup.email.placeholder">
+        <source>signup.email.placeholder</source>
+        <target>emaili@shembull.al</target>
+      </trans-unit>
+      <trans-unit id="i3_ypuH" resname="signup.email.required">
+        <source>signup.email.required</source>
+        <target>Emaili Kërkohet</target>
+      </trans-unit>
+      <trans-unit id="GMsVcyA" resname="signup.email.invalid">
+        <source>signup.email.invalid</source>
+        <target>Emaili nuk është i vlefshëm </target>
+      </trans-unit>
+      <trans-unit id="_yLEAHD" resname="signup.password.label">
+        <source>signup.password.label</source>
+        <target>Passwordi</target>
+      </trans-unit>
+      <trans-unit id="UrYGA4j" resname="signup.password.help">
+        <source>signup.password.help</source>
+        <target>Duhet të ketë të paktën 6 shkronja</target>
+      </trans-unit>
+      <trans-unit id="5xEGFR7" resname="signup.password.required">
+        <source>signup.password.required</source>
+        <target>Kërkohet Emaili</target>
+      </trans-unit>
+      <trans-unit id="vTyrOBl" resname="signup.password.length">
+        <source>signup.password.length</source>
+        <target>Passwodri duhet të ketë të paktën 6 shkronja</target>
+      </trans-unit>
+      <trans-unit id="LWF_SZb" resname="signup.nom.label">
+        <source>signup.nom.label</source>
+        <target>Mbiemri</target>
+      </trans-unit>
+      <trans-unit id=".x5XzNf" resname="signup.nom.required">
+        <source>signup.nom.required</source>
+        <target>Kërkohet Mbiemri</target>
+      </trans-unit>
+      <trans-unit id="NVXUSKy" resname="signup.nom.length">
+        <source>signup.nom.length</source>
+        <target>Emri duhet të ketë të paktën më se shumëti 255 shkrojna</target>
+      </trans-unit>
+      <trans-unit id="kv4x6_b" resname="signup.prenom.label">
+        <source>signup.prenom.label</source>
+        <target>Emri</target>
+      </trans-unit>
+      <trans-unit id="r1CgGPr" resname="signup.prenom.required">
+        <source>signup.prenom.required</source>
+        <target>Kërkohet Emri</target>
+      </trans-unit>
+      <trans-unit id="MYPhI5C" resname="signup.prenom.length">
+        <source>signup.prenom.length</source>
+        <target>Mbiemri duhet të ketë të paktën më se shumëti 255 shkrojna</target>
+      </trans-unit>
+      <trans-unit id="h8fr1tz" resname="signup.title">
+        <source>signup.title</source>
+        <target>Regjistrohu</target>
+      </trans-unit>
+      <trans-unit id="gYi8xza" resname="default.nav.Inscription">
+        <source>default.nav.Inscription</source>
+        <target>Regjistrohu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

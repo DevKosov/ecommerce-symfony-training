@@ -5,30 +5,14 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <a href="/mi5/fr/boutique/rayon/3">
-                    <li class="list-group-item text-center clickable">
-                        <img src="{{ asset("images/produits/nutella.jpg") }}" style="height: 40px;"/>
-                        <p>Nutella<br><i>130 Ventes</i></p>
-                    </li>
-                </a>
-                <a href="/mi5/fr/boutique/rayon/1">
-                    <li class="list-group-item text-center clickable">
-                        <img src="{{ asset("images/produits/peche.jpg") }}" style="height: 40px;"/>
-                        <p>Pêche<br><i>39 Ventes</i></p>
-                    </li>
-                </a>
-                <a href="/mi5/fr/boutique/rayon/3">
-                    <li class="list-group-item text-center clickable">
-                        <img src="{{ asset("images/produits/oreo.jpg") }}" style="height: 40px;"/>
-                        <p>Oreo<br><i>36 Ventes</i></p>
-                    </li>
-                </a>
-                <a href="/mi5/fr/boutique/rayon/2">
-                    <li class="list-group-item text-center clickable">
-                        <img src="{{ asset("images/produits/romanesco.jpg") }}" style="height: 40px;"/>
-                        <p>Chou Romanesco<br><i>25 Ventes</i></p>
-                    </li>
-                </a>
+                {% for product in products %}
+                    <a href="{{ path('boutique/rayon',{'idCategory' : product.product.getCategorie().getId()}) }}">
+                        <li class="list-group-item text-center clickable">
+                            <img src="{{ asset(product.product.getVisuel()) }}" style="height: 40px;"/>
+                            <p>{{ product.product.getLibelle() }}<br><i>{{ product.quantite }} Ventes</i></p>
+                        </li>
+                    </a>
+                {% endfor %}
             </ul>
         </div>
     </div>

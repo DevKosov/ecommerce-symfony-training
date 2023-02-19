@@ -21,8 +21,8 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user_id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_commande = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTime $date_commande = null;
 
     #[ORM\Column(length: 255)]
     private ?string $statut = null;

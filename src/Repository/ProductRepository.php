@@ -38,6 +38,18 @@ class ProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function like($value)
+    {
+        $value = "%" .$value . "%";
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT p
+            FROM App\Entity\Product p
+            WHERE p.libelle like :libelle"
+        )->setParameter('libelle', $value);
+        // returns an array of Product objects
+        return $query->getResult();
+    }
 
 //    /**
 //     * @return Product[] Returns an array of Product objects
